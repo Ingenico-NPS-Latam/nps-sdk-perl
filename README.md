@@ -21,9 +21,7 @@ TBD
 It's a basic configuration of the SDK
 
 ```perl
-local nps = require("npssdk")
-nps.configuration.environment = nps.SANDBOX_ENV
-nps.configuration.secret_key = "_YOUR_SECRET_KEY_"
+TBD"
 ```
 
 Here is an simple example request:
