@@ -1,29 +1,28 @@
-package utils;
+package Utils;
 
-use warnings;
-use strict;
+use warnings; use strict;
 
-use Digest::MD5 qw(md5 md5_hex md5_base64);
+use Encode qw(encode);
+
+use Digest::MD5 qw(md5_hex);
 
 use lib qw(/home/denis/Documents/trunk/sdks/Perl/nps-sdk-perl/nps-sdk);
-use services;
-use configuration;
-use constants;
+use services; use configuration; use constants; use version;
 
-use Data::Dumper;
-use Data::Structure::Util qw( unbless );
-use SOAP::Lite on_action => sub {sprintf '%s%s', @_};
-$Data::Dumper::Terse = 1; 
+use XML::Twig; use XML::Parser; 
+my $xml = XML::Twig->new(pretty_print => 'indented');
+
+use Data::Dumper; $Data::Dumper::Terse = 1; 
 
 sub add_extra_info {
 	my ($self, $service, $ref_params) = @_;
 	my %params = %{$ref_params};
-    my %hash_merch_services = map {$_ => 1} @services::get_merch_det_not_add_services;
+    my %hash_merch_services = map {$_ => 1} @Services::get_merch_det_not_add_services;
     if(exists($hash_merch_services{$service})) {
         return \%params;
     }
     my %info = (
-        SdkInfo => join " ", $constants::LANGUAGE, $constants::VERSION,
+        SdkInfo => join " ", $Constants::LANGUAGE, $Version::VERSION,
     );
     my $merch_details_key = "psp_MerchantAdditionalDetails";
     if(exists($params{$merch_details_key})) {
@@ -79,7 +78,7 @@ sub _check_sanitize {
 
 	while ((my $key, my $value) = each (%params)) {
 		if (ref($value) eq "HASH") {
-			$result_params{$key} = utils->_check_sanitize(params=>$value, nodo=>$key);
+			$result_params{$key} = Utils->_check_sanitize(params=>$value, nodo=>$key);
         } elsif (ref($value) eq "ARRAY") {
 			$result_params{$key} = _check_sanitize_array(params=>$value, nodo=>$key);
         } else {
@@ -97,7 +96,7 @@ sub _check_sanitize_array {
 	my @result_params;
 	
 	foreach my $param (@params) {
-		push @result_params, utils->_check_sanitize(params=>$param, nodo=>$nodo);
+		push @result_params, Utils->_check_sanitize(params=>$param, nodo=>$nodo);
 	}
 	return \@result_params;
 }
@@ -110,25 +109,22 @@ sub _validate_size {
 	} else {
 		$key_name = join(".", $ref_args->{key},"max_length");
 	}
-    if (exists $constants::SANITIZE{$key_name}) {
-        return "" . substr($ref_args->{value}, 0, $constants::SANITIZE{$key_name});
+    if (exists $Constants::SANITIZE{$key_name}) {
+        return "" . substr($ref_args->{value}, 0, $Constants::SANITIZE{$key_name});
     } 
     return $ref_args->{value};
 }
 
 sub _mask_data {
-	my ($self, $data) = @_;
+	my ($data) = @_;
 	$data = _mask_card_number($data);
 	$data = _mask_exp_date($data);
 	$data = _mask_cvc($data);
 	$data = _mask_tokenization_card_number($data);
 	$data = _mask_tokenization_exp_date($data);
 	$data = _mask_tokenization_cvc($data);
-	
 	return $data;
 }
-
-# CARD NUMBERS
 
 sub _mask_card_number {
 	my $data = shift;
@@ -165,8 +161,6 @@ sub replace_card_numbers {
 	return $data;
 }
 
-# EXP DATE
-
 sub _mask_exp_date {
 	my $data = shift;
 	my $exp_date_key = "</psp_CardExpDate>";
@@ -196,8 +190,6 @@ sub replace_exp_dates {
 	}
 	return $data;
 }
-
-# CVC 
 
 sub _mask_cvc {
 	my $data = shift;
@@ -231,15 +223,42 @@ sub replace_cvcs {
 	return $data;
 }
 
-#In progress
-sub _parse_to_xml {
-	my $text = shift;
-	my $parser = XML::LibXML->new();
-	my $xml = $parser->parse_string($text);
-	# Parse to string: my $formatted_xml = $xml->toString(1);
-	return $xml;
+sub masking_func {
+	my $self = shift;
+    my ($http_object, $func) = @_;
+	#print $http_object->as_string;
+    my $xml_to_parse = $func->($http_object->content);
+	if (ref($http_object) eq "HTTP::Request") {
+		$xml->safe_parse($xml_to_parse);
+		$Configuration::logger->info(encode("UTF-8", $xml->sprint())); print "\n";		
+	} elsif (ref($http_object) eq "HTTP::Response") {
+		$xml->safe_parse($xml_to_parse);
+		$Configuration::logger->info(encode("UTF-8", $xml->sprint()));
+	}
 }
 
+sub encode_params {
+	my ($self, $params) = @_;
+	my %result = %{$params};
+	while ((my $key, my $value) = each (%result)) {
+		if (ref($value) eq "HASH") {
+			$result{$key} = Utils->encode_params($value);
+		} elsif (ref($value) eq "ARRAY") {
+			$result{$key} = Utils->encode_array($value);
+		} else {
+			$result{$key} = encode("UTF-8", $params->{$key});
+		}
+	}
+	return \%result;
+}
 
+sub encode_array {
+	my ($self, $array) = @_;
+	my @result_params;
+	foreach my $item (@{$array}) {
+		push @result_params, Utils->encode_params($item);
+	}
+	return \@result_params;
+}
 
 1;

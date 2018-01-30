@@ -1,4 +1,4 @@
-package services;
+package Services;
 
 our $PAY_ONLINE_2P = "PayOnLine_2p";
 our $AUTHORIZE_2P = "Authorize_2p";

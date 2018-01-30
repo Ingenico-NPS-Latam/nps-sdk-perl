@@ -1,11 +1,13 @@
-package constants;
-use warnings;
-use strict;
+package Constants;
+use warnings; use strict;
 use Cwd 'abs_path';
 use File::Basename;
+use Log::Log4perl qw(:easy);
+
+our $DEBUG = $Log::Log4perl::DEBUG;
+our $INFO = $Log::Log4perl::INFO;
 
 our $LANGUAGE = "Perl";
-our $VERSION = "1.0.0";
 
 our $DEVELOPMENT_ENV = 3;
 our $SANDBOX_ENV = 2;
@@ -19,8 +21,8 @@ my $_DEVELOPMENT_WSDL_NAME = "development.wsdl";
 
 my $dir_file = Cwd::abs_path(__FILE__);
 my $dir = dirname($dir_file);
-my $wsdl_folder = "/wsdl/";
-my $wsdl_dir = $dir . $wsdl_folder;
+my $WSDL_FOLDER = "/wsdl/";
+my $wsdl_dir = $dir . $WSDL_FOLDER;
 
 our $_PRODUCTION_URL = $wsdl_dir . $_PRODUCTION_WSDL_NAME;
 our $_SANDBOX_URL = $wsdl_dir . $_SANDBOX_WSDL_NAME;
