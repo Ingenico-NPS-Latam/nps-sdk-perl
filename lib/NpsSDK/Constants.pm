@@ -1,36 +1,21 @@
-package Constants;
-use warnings; use strict;
-use Cwd 'abs_path';
-use File::Basename;
-use Log::Log4perl qw(:easy);
+package NpsSDK::Constants;
 
-our $DEBUG = $Log::Log4perl::DEBUG;
-our $INFO = $Log::Log4perl::INFO;
+use warnings; 
+use strict;
 
+our $VERSION = '1.4'; # VERSION
 our $LANGUAGE = "Perl";
 
-our $DEVELOPMENT_ENV = 3;
 our $SANDBOX_ENV = 2;
 our $STAGING_ENV = 1;
 our $PRODUCTION_ENV = 0;
 
-my $_PRODUCTION_WSDL_NAME = "production.wsdl";
-my $_SANDBOX_WSDL_NAME = "sandbox.wsdl";
-my $_STAGING_WSDL_NAME = "staging.wsdl";
-my $_DEVELOPMENT_WSDL_NAME = "development.wsdl";
-
-my $dir_file = Cwd::abs_path(__FILE__);
-my $dir = dirname($dir_file);
-my $WSDL_FOLDER = "/wsdl/";
-my $wsdl_dir = $dir . $WSDL_FOLDER;
-
-our $_PRODUCTION_URL = $wsdl_dir . $_PRODUCTION_WSDL_NAME;
-our $_SANDBOX_URL = $wsdl_dir . $_SANDBOX_WSDL_NAME;
-our $_STAGING_URL = $wsdl_dir . $_STAGING_WSDL_NAME;
-our $_DEVELOPMENT_URL = $wsdl_dir . $_DEVELOPMENT_WSDL_NAME;
+our $PRODUCTION_URL = "https://services2.nps.com.ar:443/ws.php";
+our $SANDBOX_URL = "https://sandbox.nps.com.ar:443/ws.php";
+our $STAGING_URL = "https://implementacion.nps.com.ar:443/ws.php";
  
 our %SANITIZE = (
-	"psp_Person.FirstName.max_length"=> "128",
+    "psp_Person.FirstName.max_length"=> "128",
     "psp_Person.LastName.max_length" => "64",
     "psp_Person.MiddleName.max_length" => "64",
     "psp_Person.PhoneNumber1.max_length" => "32",

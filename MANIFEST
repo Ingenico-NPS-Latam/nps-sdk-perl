@@ -1,0 +1,12 @@
+lib/NpsSDK/Configuration.pm
+lib/NpsSDK/Constants.pm
+lib/NpsSDK/Errors.pm
+lib/NpsSDK/Nps.pm
+lib/NpsSDK/Services.pm
+lib/NpsSDK/SoapClient.pm
+lib/NpsSDK/Utils.pm
+lib/NpsSDK/Version.pm
+LICENSE
+Makefile.PL
+MANIFEST			This list of files
+README.md
