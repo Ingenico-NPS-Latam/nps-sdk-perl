@@ -12,7 +12,7 @@ Supports Perl 5.24.1
 ## How to install
 
 ```
-cpan install NpsSDK
+cpan install NpsSDK::Nps
 ```
 
 ## Configuration
@@ -58,7 +58,7 @@ my $params = {
 my $response = NpsSDK::Nps::pay_online_2p($params);	
 ```
 
-## environments
+## Environments
 
 ```perl
 use NpsSDK::Nps;
