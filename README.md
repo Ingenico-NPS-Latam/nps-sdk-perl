@@ -66,6 +66,28 @@ $NpsSDK::Constants::STAGING_ENV
 $NpsSDK::Constants::SANDBOX_ENV
 ```
 
+## Error handling
+
+You can check if something went wrong checking the type of $response. There are 3 type of errors: Timeout, Connection and Unknown. Their type of object are NpsSDK::TimeoutException, NpsSDK::ConnectionException, NpsSDK::UnknownError respectively.
+
+The example below also work for Connection and Unknown errors.
+
+```perl
+use NpsSDK::Nps;
+use warnings;
+use stricts;
+
+NpsSDK::Configuration::configure(environment => $NpsSDK::Constants::SANDBOX_ENV,
+                                 secret_key  => "_YOUR_SECRET_KEY_",
+                                 timeout     => 60);
+
+my $response = NpsSDK::Nps::pay_online_2p($params);
+
+if (ref($response) eq "NpsSDK::TimeoutException") {
+	#Your code to handle the error
+};
+```
+
 ## Advanced configurations
 
 Nps SDK allows you to log what’s happening with you request inside of our SDK.
