@@ -142,6 +142,8 @@ Sanitize allows the SDK to truncate to a fixed size some fields that could make 
 
 ```perl
 use NpsSDK::Nps;
+use warnings; 
+use strict;
 
 NpsSDK::Configuration::configure(environment => $NpsSDK::Constants::SANDBOX_ENV,
                                  secret_key  => "_YOUR_SECRET_KEY_",
@@ -152,6 +154,8 @@ You can change the timeout of the request.
 
 ```perl
 use NpsSDK::Nps;
+use warnings; 
+use strict;
 
 NpsSDK::Configuration::configure(environment => $NpsSDK::Constants::SANDBOX_ENV,
                                  secret_key  => "_YOUR_SECRET_KEY_",
