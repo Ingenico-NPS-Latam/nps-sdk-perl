@@ -53,7 +53,7 @@ my $params = {
     'psp_CardSecurityCode' => '123'
 };
 
-my $response = NpsSDK::Nps::pay_online_2p($params);	
+my $response = NpsSDK::Nps::pay_online_2p($params); 
 ```
 
 ## Environments
@@ -84,11 +84,13 @@ NpsSDK::Configuration::configure(environment => $NpsSDK::Constants::SANDBOX_ENV,
 my $response = NpsSDK::Nps::pay_online_2p($params);
 
 if (ref($response) eq "NpsSDK::TimeoutException") {
-	#Your code to handle the error
+    #Your code to handle the error
 };
 ```
 
 ## Advanced configurations
+
+### Logging 
 
 Nps SDK allows you to log what’s happening with you request inside of our SDK.
 In order to do so you will have to create a logger with Log::Log4perl and pass it by configuration.
@@ -102,6 +104,8 @@ NpsSDK::Configuration::configure(environment => $NpsSDK::Constants::SANDBOX_ENV,
                                  secret_key  => "_YOUR_SECRET_KEY_",
                                  logger      => $logger);
 ```
+
+### LogLevel
 
 The INFO level will write concise information of the request and will mask sensitive data of the request. 
 The DEBUG level will write information about the request to let developers debug it in a more detailed way.
@@ -159,6 +163,7 @@ NpsSDK::Configuration::configure(environment => $NpsSDK::Constants::SANDBOX_ENV,
                                  logger      => $logger);
 ```
 
+### Sanitize
 
 Sanitize allows the SDK to truncate to a fixed size some fields that could make request fail, like extremely long name.
 
@@ -171,6 +176,8 @@ NpsSDK::Configuration::configure(environment => $NpsSDK::Constants::SANDBOX_ENV,
                                  secret_key  => "_YOUR_SECRET_KEY_",
                                  sanitize    => 1);
 ```
+
+### Timeout
 
 You can change the timeout of the request.
 
