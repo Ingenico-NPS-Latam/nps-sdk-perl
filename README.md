@@ -1,7 +1,4 @@
-# nps-sdk-perl
-Perl Server-side SDK
-
-#  Perl SDK
+# Perl SDK
 
   
 ## Availability
