@@ -28,7 +28,7 @@ sub add_extra_info {
     return \%params if(exists($hash_merch_services{$service}));
 
     my %info = (
-        SdkInfo => join " ", $NpsSDK::Constants::LANGUAGE, $NpsSDK::Version::VERSION,
+        SdkInfo => join " ", $NpsSDK::Constants::LANGUAGE, "SDK", "Version:",$NpsSDK::Version::VERSION,
     );
 
     my $merch_details_key = "psp_MerchantAdditionalDetails";
