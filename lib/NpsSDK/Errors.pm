@@ -1,4 +1,4 @@
-our $VERSION = 'Perl SDK Version: 1.8'; # VERSION
+our $VERSION = '1.9'; # VERSION
 
 ################################################
 package NpsSDK::TimeoutException;
