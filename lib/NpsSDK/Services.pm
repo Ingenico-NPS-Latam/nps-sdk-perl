@@ -1,6 +1,6 @@
 package NpsSDK::Services;
 
-our $VERSION = '1.4'; # VERSION
+our $VERSION = 'Perl SDK Version: 1.7'; # VERSION
 
 our $PAY_ONLINE_2P = "PayOnLine_2p";
 our $AUTHORIZE_2P = "Authorize_2p";

@@ -12,7 +12,7 @@ use Data::Structure::Util qw( unbless );
 
 use Encode qw(encode);
 
-our $VERSION = '1.6'; # VERSION
+our $VERSION = 'Perl SDK Version: 1.7'; # VERSION
 
 my $connection; 
 my $response; 

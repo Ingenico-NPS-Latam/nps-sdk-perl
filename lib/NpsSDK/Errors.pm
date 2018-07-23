@@ -1,7 +1,8 @@
+our $VERSION = 'Perl SDK Version: 1.7'; # VERSION
+
 ################################################
 package NpsSDK::TimeoutException;
 
-our $VERSION = '1.4'; # VERSION
 sub new { 
     my $self = {};
     bless ($self, "NpsSDK::TimeoutException");

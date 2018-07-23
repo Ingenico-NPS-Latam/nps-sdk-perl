@@ -3,6 +3,6 @@ package NpsSDK::Version;
 use warnings; 
 use strict;
 
-our $VERSION = "1.6";
+our $VERSION = 'Perl SDK Version: 1.7';
 
 1;

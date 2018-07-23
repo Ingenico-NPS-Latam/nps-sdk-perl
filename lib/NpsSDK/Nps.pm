@@ -6,7 +6,7 @@ use strict;
 use NpsSDK::SoapClient;
 use NpsSDK::Services;
 
-our $VERSION = '1.4'; # VERSION
+our $VERSION = 'Perl SDK Version: 1.7'; # VERSION
 
 sub pay_online_2p {
     my ($params) = @_;
