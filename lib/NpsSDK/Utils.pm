@@ -17,7 +17,7 @@ use XML::Parser;
 
 use Data::Dumper; use Data::UUID; $Data::Dumper::Terse = 1; 
 
-our $VERSION = 'Perl SDK Version: 1.7'; # VERSION
+our $VERSION = 'Perl SDK Version: 1.8'; # VERSION
 
 sub add_extra_info {
     my ($service, $ref_params) = @_;

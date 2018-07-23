@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
   NAME             => 'NpsSDK::Nps',
-  VERSION          => '1.7',
+  VERSION          => '1.8',
   AUTHOR           => 'IngenicoNpsLatam',
   LICENSE          => 'MIT',
   MIN_PERL_VERSION => '5.008004',
