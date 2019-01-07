@@ -17,7 +17,7 @@ use XML::Parser;
 
 use Data::Dumper; use Data::UUID; $Data::Dumper::Terse = 1; 
 
-our $VERSION = '1.10'; # VERSION
+our $VERSION = '1.11'; # VERSION
 
 sub add_extra_info {
     my ($service, $ref_params) = @_;

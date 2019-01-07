@@ -1,4 +1,4 @@
-our $VERSION = '1.10'; # VERSION
+our $VERSION = '1.11'; # VERSION
 
 ################################################
 package NpsSDK::TimeoutException;
