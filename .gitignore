@@ -1,4 +1,4 @@
-test/
+#test/
 testing_files/
 *.tar.gz
 blib/*
